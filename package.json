@@ -1,5 +1,5 @@
 {
-  "name": "nuxt-type",
+  "name": "typescript-nuxt-starter",
   "version": "1.0.0",
   "description": "My bee&#39;s knees Nuxt.js project",
   "author": "ttatsato",
@@ -8,15 +8,21 @@
     "dev": "nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
-    "generate": "nuxt generate"
+    "generate": "nuxt generate",
+    "heroku-postbuild": "npm run build"
   },
   "dependencies": {
-    "nuxt": "^2.0.0"
+    "@nuxtjs/sitemap": "^2.0.1",
+    "@nuxtjs/axios": "5.8.0",
+    "@nuxt/typescript-runtime": "0.2.7",
+    "nuxt": "^2.0.0",
+    "nuxt-buefy": "^0.3.19",
+    "vuex-class": "0.3.2"
   },
   "devDependencies": {
     "@nuxt/typescript-build": "^0.3.4",
     "node-sass": "^4.13.0",
-    "sass-loader": "^8.0.0",
-    "vue-property-decorator": "^8.3.0"
+    "nuxt-property-decorator": "^2.5.0",
+    "sass-loader": "^8.0.0"
   }
 }
