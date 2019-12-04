@@ -1,9 +1,11 @@
 <template>
   <div>
-    <nuxt />
+    <navigation-bar></navigation-bar>
+    <div class="l-default__main">
+      <nuxt />
+    </div>
   </div>
 </template>
-
 <style>
 html {
   font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',
@@ -52,4 +54,15 @@ html {
   color: #fff;
   background-color: #35495e;
 }
+
+.l-default__main {
+  margin: 1rem auto auto;
+  max-width: 1012px;
+}
 </style>
+<script>
+  import NavigationBar from "../components/organisms/NavigationBar";
+  export default {
+    components: {NavigationBar}
+  }
+</script>

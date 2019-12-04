@@ -1,0 +1,29 @@
+{
+  "id": 1,
+  "tel": "07021850803",
+  "personal": {
+    "sex": "男",
+    "height": 175
+  },
+  "numberOfArticles": 1,
+  "tags": {
+    "fromShop": [
+      {
+        "id": 1,
+        "name": "未納"
+      }
+    ],
+    "fromPersonal" : []
+  },
+  "articles" : [
+    {
+      "id": 1,
+      "type": "shop",
+      "shop": {
+        "id": 20,
+        "name": "bar Tatsuya"
+      },
+      "content": "売掛金約500万円を未納。連絡なし。"
+    }
+  ]
+}
