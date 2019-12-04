@@ -1,59 +1,60 @@
-<!--<template>-->
-  <!--<div>-->
-    <!--<section>-->
-      <!--<b-field position="is-centered">-->
-        <!--<b-input placeholder="電話番号で検索..."-->
-                 <!--v-model="phoneNumber"-->
-                 <!--type="search"-->
-                 <!--icon="magnify">-->
-        <!--</b-input>-->
-        <!--<p class="control">-->
-          <!--<button-->
-            <!--@click="search(phoneNumber)"-->
-            <!--class="button is-primary">Search</button>-->
-        <!--</p>-->
-      <!--</b-field>-->
-    <!--</section>-->
-    <!--<section-->
-      <!--v-for="searchResult in searchResults"-->
-      <!--:key="searchResult.id"-->
-    <!--&gt;-->
-      <!--<section>-->
-        <!--<h1>お店からの報告</h1>-->
-        <!--&lt;!&ndash;<SearchResultTable&ndash;&gt;-->
-          <!--&lt;!&ndash;:data="searchResult.ArticleFromShop"&ndash;&gt;-->
-        <!--&lt;!&ndash;&gt;</SearchResultTable>&ndash;&gt;-->
-      <!--</section>-->
-    <!--</section>-->
-    <!--<section>-->
-      <!--<code>-->
-      <!--<pre>-->
-        <!--{{searchResults}}-->
-      <!--</pre>-->
-      <!--</code>-->
-    <!--</section>-->
-  <!--</div>-->
-<!--</template>-->
-<!--<script lang="ts">-->
-  <!--import {Component, namespace, Vue} from 'nuxt-property-decorator'-->
-  <!--import * as search from '../store/modules/search'-->
-  <!--import {SearchResult} from "../types";-->
-  <!--const Search = namespace(search.name)-->
+<template>
+  <div>
+    <section>
+      <b-field position="is-centered">
+        <b-input placeholder="電話番号で検索..."
+                 v-model="phoneNumber"
+                 type="search"
+                 icon="magnify">
+        </b-input>
+        <p class="control">
+          <button
+            @click="search(phoneNumber)"
+            class="button is-primary">Search</button>
+        </p>
+      </b-field>
+    </section>
+    <section>
+      <section>
+        <h1>お店からの報告</h1>
+        {{result}}
+        <!--<search-result-table-->
+          <!--:searchResult="searchResult.ArticlesFromShop"-->
+        <!--&gt;-->
+        <!--</search-result-table>-->
+      </section>
+    </section>
+    <section>
+      <code>
+      <pre>
+        {{result}}
+      </pre>
+      </code>
+    </section>
+  </div>
+</template>
+<script lang="ts">
+  import {Component, Vue} from 'nuxt-property-decorator'
+  import { searchStore } from '~/store'
+  import SearchResultTable from "../components/organisms/SearchResultTable.vue";
+  import SearchRepository from "../api/search";
 
-  <!--@Component({-->
-    <!--// SearchResultTable: () => import('~/components/organisms/SearchResultTable')-->
-  <!--})-->
-  <!--export default class SearchPage extends Vue {-->
-    <!--phoneNumber: string = ''-->
-    <!--@Search.State('searchResults') searchResults: SearchResult[]-->
-    <!--@Search.Action('select') select: any-->
+  const searchRepository = new SearchRepository();
 
-    <!--async search (phoneNumber: string) : Promise<void> {-->
-      <!--this.select(phoneNumber);-->
-    <!--}-->
-  <!--}-->
-<!--</script>-->
-<!--<style lang="sass" scoped>-->
-  <!--section-->
-    <!--margin-top: 3rem-->
-<!--</style>-->
+  @Component({
+    components: {
+      SearchResultTable
+    }
+  })
+  export default class SearchPage extends Vue {
+    phoneNumber: string = '';
+    result: object = {};
+    async search (phoneNumber: string) : Promise<void> {
+      this.result = await searchRepository.find(phoneNumber)
+    }
+  }
+</script>
+<style lang="sass" scoped>
+  section
+    margin-top: 3rem
+</style>

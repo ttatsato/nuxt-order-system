@@ -1,8 +1,6 @@
 <template>
   <div>
-    <div v-for="result in searchResults">
-      {{result}}
-    </div>
+    {{result}}
   </div>
 </template>
 <script lang="ts">
@@ -15,8 +13,8 @@
     created () {
       searchStore.findResult('098765')
     }
-    get searchResults (): SearchResult[] {
-      return searchStore.results
+    get searchResult (): SearchResult {
+      return searchStore.result
     }
   }
 </script>

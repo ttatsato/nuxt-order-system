@@ -2,20 +2,22 @@ import { VuexModule, Module, Mutation, Action } from 'vuex-module-decorators'
 import axios from 'axios'
 import {SearchResult} from '~/types'
 export interface SearchState {
-  results: SearchResult[]
+  result: SearchResult
 }
 
 @Module({ stateFactory: true, namespaced: true, name: 'search' })
 export default class Search extends VuexModule implements SearchState {
-  results: SearchResult[] = []
+  result: SearchResult;
 
-  get searchResults () {
-    return this.results
+  get searchResult () {
+    return this.result
   }
 
   @Mutation
   setResult(result: SearchResult) {
-    this.results.push(result)
+    console.log(result)
+    this.result = result
+    console.log(this.result)
   }
 
   @Action
