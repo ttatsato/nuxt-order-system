@@ -1,72 +1,22 @@
 <template>
-  <div class="container">
-    <div>
-      <logo />
-      <input type="button" @click="test"/>
-      <h1 class="title">{{title}}</h1>
-      <h2 class="subtitle">
-        My bee&#39;s knees Nuxt.js project
-      </h2>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          class="button--green"
-        >
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          class="button--grey"
-        >
-          GitHub
-        </a>
-      </div>
+  <div>
+    <div v-for="result in searchResults">
+      {{result}}
     </div>
   </div>
 </template>
 <script lang="ts">
-import { Component, Vue } from 'nuxt-property-decorator'
+  import {Component, Vue} from 'nuxt-property-decorator'
+  import { searchStore } from '~/store'
+  import {SearchResult} from "../types";
 
-@Component({
-  components: {
-    Logo: () => import('~/components/Logo.vue')
+  @Component
+  export default class Index extends Vue {
+    created () {
+      searchStore.findResult('098765')
+    }
+    get searchResults (): SearchResult[] {
+      return searchStore.results
+    }
   }
-})
-export default class Index extends Vue {
-  title: string = 'This is a message'
-  async test () : Promise<void> {
-    console.log(await this.$axios.get('/'));
-    alert('test')
-  }
-}
 </script>
-
-<style lang="sass">
-  .container
-    margin: 0 auto
-    min-height: 100vh
-    display: flex
-    justify-content: center
-    align-items: center
-    text-align: center
-
-  .title
-    font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif
-    display: block
-    font-weight: 300
-    font-size: 100px
-    color: #35495e
-    letter-spacing: 1px
-
-  .subtitle
-    font-weight: 300
-    font-size: 42px
-    color: #526488
-    word-spacing: 5px
-    padding-bottom: 15px
-
-  .links
-    padding-top: 15px
-</style>
