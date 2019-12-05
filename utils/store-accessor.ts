@@ -1,6 +1,6 @@
 import { Store } from 'vuex'
 import { getModule } from 'vuex-module-decorators'
-import Search from '~/store/search'
+import Search from '../store/search'
 
 let searchStore: Search
 

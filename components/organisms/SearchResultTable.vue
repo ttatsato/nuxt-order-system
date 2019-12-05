@@ -1,4 +1,4 @@
-<template>
+{<template>
   <section>
     <b-table
       :data="searchResult"
@@ -13,7 +13,6 @@
       aria-previous-label="Previous page"
       aria-page-label="Page"
       aria-current-label="Current page">
-
       <template slot-scope="props">
         <b-table-column
           field="id"
@@ -27,7 +26,7 @@
           label="月日"
           width="10"
           sortable centered>
-          {{ new Date(props.row.date).toLocaleDateString() }}
+          {{ '2019/09/20' }}
         </b-table-column>
         <b-table-column
           field="tag"
@@ -35,29 +34,18 @@
           label="報告タイプ"
           sortable centered>
             <span class="tag is-success">
-                {{ new Date(props.row.date).toLocaleDateString() }}
-            </span>
-          <span class="tag is-success">
-                {{ new Date(props.row.date).toLocaleDateString() }}
-            </span>
-          <span class="tag is-success">
-                {{ new Date(props.row.date).toLocaleDateString() }}
+                {{ '窃盗' }}
             </span>
         </b-table-column>
         <b-table-column
-          field="user.first_name"
+          field="content"
           width="500"
           label="報告内容">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-          Proin ornare magna eros, eu pellentesque tortor vestibulum ut.
-          Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.
+          {{ props.row.content }}
         </b-table-column>
         <b-table-column label="投稿者">
                     <span>
-                        <b-icon pack="fas"
-                                :icon="props.row.gender === 'Male' ? 'mars' : 'venus'">
-                        </b-icon>
-                        {{ props.row.gender }}
+                        {{ props.row.shop.name }}
                     </span>
         </b-table-column>
       </template>
@@ -69,13 +57,10 @@
           <div class="media-content">
             <div class="content">
               <p>
-                <strong>{{ props.row.user.first_name }} {{ props.row.user.last_name }}</strong>
-                <small>@{{ props.row.user.first_name }}</small>
+                <strong>{{ props.row.shop.name }}</strong>
                 <small>31m</small>
                 <br>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Proin ornare magna eros, eu pellentesque tortor vestibulum ut.
-                Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.
+                {{props.row.content}}
               </p>
             </div>
           </div>
@@ -86,19 +71,14 @@
 </template>
 
 <script>
-  import {Component, Prop, Watch, Vue} from 'nuxt-property-decorator'
+  import {Component, Prop, Vue} from 'nuxt-property-decorator'
 
   @Component()
   export default class SearchResultTable extends Vue {
-    @Prop({type: Array})
+    @Prop()
     searchResult;
 
     defaultOpenedDetails = [1];
     showDetailIcon = true
-
-    @Watch('searchResult')
-    change (change) {
-      console.log(change)
-    }
   }
 </script>

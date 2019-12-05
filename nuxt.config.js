@@ -42,7 +42,11 @@ export default {
     'nuxt-buefy',
     '@nuxtjs/sitemap'
   ],
-  axios: {},
+  axios: {
+    baseURL: process.env.VUE_APP_MOCK_API,
+    timeout: 5000,
+    debug: true
+  },
   sitemap: {
     path: '/sitemap.xml',
     hostname: '{{HOSTNAME}}',
@@ -75,6 +79,14 @@ export default {
   vue: {
     config: {
       ignoredElements :['nuxt']
+    }
+  },
+  router: {
+    extendRoutes(routes, resolve) {
+      routes.push({
+        path: '*',
+        component: resolve(__dirname, 'pages/404.vue')
+      })
     }
   }
 }
