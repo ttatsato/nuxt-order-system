@@ -49,7 +49,7 @@ export default {
   },
   sitemap: {
     path: '/sitemap.xml',
-    hostname: '{{HOSTNAME}}',
+    hostname: 'https://hopeful-benz-6500ea.netlify.com',
     // generate: true,
     // 動的分もsitemapについかする処理
     // async routes () {
