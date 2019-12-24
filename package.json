@@ -1,7 +1,7 @@
 {
-  "name": "typescript-nuxt-starter",
+  "name": "order_sass",
   "version": "1.0.0",
-  "description": "My bee&#39;s knees Nuxt.js project",
+  "description": "this is self order system",
   "author": "ttatsato",
   "private": true,
   "scripts": {
