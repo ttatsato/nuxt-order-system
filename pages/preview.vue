@@ -43,7 +43,7 @@
         >戻る</b-button>
         <b-button
           rounded
-          @click="$router.push('/complete')"
+          @click="makeOrder()"
         >注文確定</b-button>
       </div>
     </div>
@@ -53,6 +53,7 @@
   import {Component, Vue} from 'nuxt-property-decorator'
   import {searchStore} from '~/store'
   import ProductCard from '../components/organisms/ProductCard.vue'
+  import OrderRepository from "../api/order";
 
   @Component({
     components: {
@@ -60,6 +61,15 @@
     }
   })
   export default class Preview extends Vue {
+
+    /**
+     * 商品をオーダーする
+     */
+    makeOrder () {
+      const orderRepository = new OrderRepository()
+      orderRepository.make()
+      //  $router.push('/complete')"
+    }
   }
 </script>
 <style lang="sass" scoped>
