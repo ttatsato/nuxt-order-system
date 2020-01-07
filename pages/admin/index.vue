@@ -45,6 +45,20 @@
   export default class AdminIndex extends Vue {
     name: string = ''
     price: number = 10
+
+    @Watch('name')
+    private changeName (v: string) {
+      console.log(v)
+    }
+
+    @Watch('price')
+    private changePrice (v: string) {
+      console.log(v)
+      if (typeof v !== "number") {
+        this.price = parseInt(v)
+      }
+    }
+
     /**
      * メニューを作成する
      */
@@ -52,9 +66,12 @@
       const productRepository = new ProductRepository()
       const product: Product = {
         id: null,
+        shopId: 1,
         name: this.name,
         price: this.price
       }
+      // price: typeof this.price !== "number" ? parseInt(this.price) : this.price
+
       const result = await productRepository.create(product)
       alert(result.data.name + "を登録しました。")
       //  $router.push('/complete')"
@@ -62,7 +79,7 @@
     }
     resetFormValue () {
       this.name = ''
-      this.price = null
+      this.price = 0
     }
   }
 </script>

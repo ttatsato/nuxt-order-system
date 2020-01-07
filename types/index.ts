@@ -24,6 +24,7 @@ export interface Order {
 }
 export interface Product {
   id: number
+  shopId: number
   name: string
   price: number
 }

@@ -2,17 +2,13 @@
   <div class="order-list">
     <navigation-bar></navigation-bar>
     <div class="order-list__body">
-      <div class="product-card__row">
-        <ProductCard/>
-        <ProductCard/>
-      </div>
-      <div class="product-card__row">
-        <ProductCard/>
-        <ProductCard/>
-      </div>
-      <div class="product-card__row">
-        <ProductCard/>
-        <ProductCard/>
+      <div
+        class="columns product-card__row">
+        <ProductCard
+          v-for="product in products"
+          class="column is-5"
+          :product="product"
+        />
       </div>
     </div>
     <footer
@@ -36,6 +32,8 @@
   import {Component, Vue} from 'nuxt-property-decorator'
   import {searchStore} from '~/store'
   import ProductCard from '../components/organisms/ProductCard.vue'
+  import ProductRepository from "../api/product";
+  import {Product} from "../types";
 
   @Component({
     components: {
@@ -43,6 +41,15 @@
     }
   })
   export default class Index extends Vue {
+    products: Array<Product> = []
+    async created () {
+      // TODO ショップIDを入店時に取得できるように。
+      const shopId = 1
+      const productRepository = new ProductRepository()
+      const result = await productRepository.fetch(shopId)
+      this.products = result.data
+      console.log(this.products)
+    }
   }
 </script>
 <style lang="sass" scoped>
@@ -51,8 +58,12 @@
     margin-left: 4px
     padding-bottom: 5rem
   .product-card__row
-    display: flex
-    margin-bottom: 1rem
+    display: grid
+    grid-template-columns: 1fr 1fr
+    margin: auto
+    padding: 0.25rem
+    /*display: flex*/
+    /*margin-bottom: 1rem*/
   
   .order-list__footer
     background: rgba(0, 0, 0, 0.8)

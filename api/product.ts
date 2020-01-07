@@ -10,13 +10,13 @@ export default class ProductRepository {
         return res
       })
   }
-  fetch (): Promise<SearchResult> {
+  fetch (shopId: number): Promise<any> {
     // https://us-central1-smartwaiter-263011.cloudfunctions.net/makeOrder
-    return RequestService.get<SearchResult>('http://localhost:1323/order')
+    return RequestService.get<any>('http://localhost:1323/product/'+shopId)
     // return RequestService.post<SearchResult>('https://us-central1-smartwaiter-263011.cloudfunctions.net/makeOrder', data)
       .then(res => {
         console.log(res)
-        return <SearchResult>res.data;
+        return res;
       })
   }
 }

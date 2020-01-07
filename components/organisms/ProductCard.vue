@@ -4,10 +4,10 @@
       class="product-card__media"
       src="../../../../Downloads/98.jpg"/>
     <div class="product-card__body">
-      <p>熱々のジュージューハンバーグ</p>
+      <p>{{product.name}}</p>
     </div>
     <div class="product-card__footer">
-      <p>¥1,980</p>
+      <p>¥{{product.price}}</p>
       <b-button
         class="product-card__body-btn"
         rounded
@@ -16,17 +16,19 @@
   </div>
 </template>
 <script lang="ts">
-  import {Component, Vue} from 'nuxt-property-decorator'
+  import {Component, Prop, Vue} from 'nuxt-property-decorator'
   import { searchStore } from '~/store'
+  import {Product} from "../../types";
 
   @Component
   export default class ProductCard extends Vue {
+    @Prop()
+    product: Product
   }
 </script>
 <style lang="sass" scoped>
   .product-card
     padding: 0.25rem
-    width: 50%
   .product-card__body
     position: relative
     height: 3rem
