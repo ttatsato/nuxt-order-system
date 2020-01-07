@@ -12,6 +12,21 @@ export interface Person {
   id: number;
   phoneNumber: string;
 }
+export interface OrderSet {
+  order: Array<Order>
+}
+export interface Order {
+  userId: number
+  shopId: number
+  product: Product
+  memo: string
+  status: string
+}
+export interface Product {
+  id: number
+  name: string
+  price: number
+}
 
 
 export interface Article {

@@ -54,6 +54,7 @@
   import {searchStore} from '~/store'
   import ProductCard from '../components/organisms/ProductCard.vue'
   import OrderRepository from "../api/order";
+  import {OrderSet, Product} from "../types";
 
   @Component({
     components: {
@@ -67,7 +68,33 @@
      */
     makeOrder () {
       const orderRepository = new OrderRepository()
-      orderRepository.make()
+      let orderSet: OrderSet = {
+        order: [
+          {
+            userId: 1,
+            shopId: 1,
+            product: {
+              id: 12,
+              name: "ハンバーグ",
+              price: 2900
+            },
+            memo: "これはメモです。",
+            status: "注文"
+          },
+          {
+            userId: 1,
+            shopId: 1,
+            product: {
+              id: 12,
+              name: "ミニハンバーグ",
+              price: 1000
+            },
+            memo: "ケチャップ抜き",
+            status: "注文"
+          }
+        ]
+      }
+      orderRepository.make(orderSet)
       //  $router.push('/complete')"
     }
   }
