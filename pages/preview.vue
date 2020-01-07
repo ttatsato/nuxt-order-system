@@ -2,33 +2,28 @@
   <div class="preview">
     <h2>注文確認</h2>
     <div class="preview__body">
+      <p>合計品数... {{orders.length}}</p>
       <table class="preview-table">
         <thead>
         <tr>
+          <th>No.</th>
           <th>品名</th>
-          <th>数</th>
           <th>金額</th>
           <th>メモ</th>
         </tr>
         </thead>
         <tbody>
-        <tr>
-          <td>熱々ジューシーハンバーグ</td>
-          <td>1</td>
-          <td>¥1,980</td>
+        <tr
+          v-for="(order, index) in orders"
+          :key="index"
+        >
+          <td>{{index}}</td>
+          <td>{{order.product.name}}</td>
+          <td>{{order.product.price}}</td>
           <td>
               <textarea
                 placeholder="例: ネギ抜きなど"
-              ></textarea>
-          </td>
-        </tr>
-        <tr>
-          <td>熱々ジューシーハンバーグ</td>
-          <td>1</td>
-          <td>¥1,980</td>
-          <td>
-              <textarea
-                placeholder="例: ネギ抜きなど"
+                v-model="memo[index]"
               ></textarea>
           </td>
         </tr>
@@ -53,8 +48,8 @@
   import {Component, Vue} from 'nuxt-property-decorator'
   import {searchStore} from '~/store'
   import ProductCard from '../components/organisms/ProductCard.vue'
-  import OrderRepository from "../api/order";
-  import {OrderSet, Product} from "../types";
+  import {Order, OrderSet} from "../types/order";
+  import {orderStore} from "../utils/store-accessor";
 
   @Component({
     components: {
@@ -63,39 +58,24 @@
   })
   export default class Preview extends Vue {
 
+    memo: Array<string> = []
+
+    get orders(): Array<Order> {
+      const orderSet = orderStore.getOrderSet
+      return orderSet.order
+    }
+
     /**
      * 商品をオーダーする
      */
-    makeOrder () {
-      const orderRepository = new OrderRepository()
-      let orderSet: OrderSet = {
-        order: [
-          {
-            userId: 1,
-            shopId: 1,
-            product: {
-              id: 12,
-              name: "ハンバーグ",
-              price: 2900
-            },
-            memo: "これはメモです。",
-            status: "注文"
-          },
-          {
-            userId: 1,
-            shopId: 1,
-            product: {
-              id: 12,
-              name: "ミニハンバーグ",
-              price: 1000
-            },
-            memo: "ケチャップ抜き",
-            status: "注文"
-          }
-        ]
+    async makeOrder () {
+      const res = await orderStore.decideOrder(this.memo)
+      if(res) {
+        alert("注文が完了しました")
+        this.$router.push('/complete')
+      } else {
+        alert("注文に失敗しました")
       }
-      orderRepository.make(orderSet)
-      //  $router.push('/complete')"
     }
   }
 </script>

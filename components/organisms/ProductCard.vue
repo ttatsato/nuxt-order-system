@@ -9,21 +9,47 @@
     <div class="product-card__footer">
       <p>¥{{product.price}}</p>
       <b-button
+        v-show="count === 0"
         class="product-card__body-btn"
+        @click="choice()"
         rounded
       >選択</b-button>
+      <div
+        v-show="count > 0"
+        class="product-card__body-btn"
+      >
+        <span>-</span>
+        <b-button
+          v-show="count > 0"
+          @click="choice()"
+          rounded
+        >{{count}}</b-button>
+        <span>+</span>
+      </div>
     </div>
   </div>
 </template>
 <script lang="ts">
-  import {Component, Prop, Vue} from 'nuxt-property-decorator'
-  import { searchStore } from '~/store'
+  import {Component, Prop, Vue, Watch} from 'nuxt-property-decorator'
+  import {orderStore} from '~/store'
   import {Product} from "../../types";
 
   @Component
   export default class ProductCard extends Vue {
     @Prop()
     product: Product
+
+    count: number = 0
+
+    // @Watch('count')
+    // countChange (c: number) {
+    // }
+
+    choice () {
+      orderStore.appendOrder(this.product).then(() => {
+        this.count++
+      })
+    }
   }
 </script>
 <style lang="sass" scoped>

@@ -3,30 +3,6 @@
     <h2>注文完了</h2>
     <div class="preview__body">
       <p>注文が完了しました!<br>商品が届くまでしばらくお待ちください。</p>
-      <table class="preview-table">
-        <thead>
-        <tr>
-          <th>品名</th>
-          <th>数</th>
-          <th>金額</th>
-          <th>メモ</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-          <td>熱々ジューシーハンバーグ</td>
-          <td>1</td>
-          <td>¥1,980</td>
-          <td>ネギは抜いてください。</td>
-        </tr>
-        <tr>
-          <td>熱々ジューシーハンバーグ</td>
-          <td>1</td>
-          <td>¥1,980</td>
-          <td>ネギは抜いてください。</td>
-        </tr>
-        </tbody>
-      </table>
     </div>
     <div class="preview__footer">
       <div class="footer-btn-container">

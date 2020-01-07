@@ -15,12 +15,18 @@
       class="order-list__footer"
     >
       <div class="order-list__footer-content">
-        <p>熱々ジュージューハンバーグ</p>
-        <p>... 他９品</p>
+        <div v-if="orderSetCount > 0">
+          <p>{{orders[orders.length - 1]["product"]["name"]}}</p>
+          <p>... 他{{orderSetCount}}品</p>
+        </div>
+        <div v-else>
+          <p>メニューを選択してください</p>
+        </div>
       </div>
       <div class="order-list__footer-content--right">
         <b-button
           class="order-list__submit-btn"
+          :disabled="orderSetCount === 0"
           rounded
           @click="$router.push('/preview')"
         >注文する</b-button>
@@ -34,6 +40,8 @@
   import ProductCard from '../components/organisms/ProductCard.vue'
   import ProductRepository from "../api/product";
   import {Product} from "../types";
+  import {orderStore} from "../utils/store-accessor";
+  import {Order} from "../types/order";
 
   @Component({
     components: {
@@ -49,6 +57,13 @@
       const result = await productRepository.fetch(shopId)
       this.products = result.data
       console.log(this.products)
+    }
+    get orderSetCount(): number{
+      return Object.keys(this.orders).length
+    }
+    get orders(): Array<Order> {
+      const orderSet = orderStore.getOrderSet
+      return orderSet.order
     }
   }
 </script>
