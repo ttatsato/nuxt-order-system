@@ -10,3 +10,8 @@ export interface Order {
   memo: string
   status: string
 }
+
+export interface ApiResult {
+  data: object
+  status: number
+}

@@ -5,7 +5,8 @@
       <div
         class="columns product-card__row">
         <ProductCard
-          v-for="product in products"
+          v-for="(product, index) in products"
+          :key="index"
           class="column is-5"
           :product="product"
         />
@@ -17,7 +18,7 @@
       <div class="order-list__footer-content">
         <div v-if="orderSetCount > 0">
           <p>{{orders[orders.length - 1]["product"]["name"]}}</p>
-          <p>... 他{{orderSetCount}}品</p>
+          <p>... 計{{orderSetCount}}品</p>
         </div>
         <div v-else>
           <p>メニューを選択してください</p>
