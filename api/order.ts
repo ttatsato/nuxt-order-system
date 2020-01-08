@@ -1,6 +1,6 @@
 import {SearchResult} from "~/types";
 import RequestService from '~/utils/request'
-import {ApiResult} from "~/types/order";
+import {ApiResult, Order} from "~/types/order";
 export default class OrderRepository {
   // @ts-ignore
   make (orderSet): Promise<any> {
@@ -11,12 +11,16 @@ export default class OrderRepository {
         return res
       })
   }
-  fetch (): Promise<SearchResult> {
-    // https://us-central1-smartwaiter-263011.cloudfunctions.net/makeOrder
-    return RequestService.get<SearchResult>('http://localhost:1323/order')
-    // return RequestService.post<SearchResult>('https://us-central1-smartwaiter-263011.cloudfunctions.net/makeOrder', data)
+  fetchByShopId (shopId: number): Promise<{
+    status: number,
+    data: Array<Order>
+  }> {
+    return RequestService.get<any>('http://localhost:1323/shop/order/' + shopId)
       .then(res => {
-        return <SearchResult>res.data;
+        return {
+          status: res.status,
+          data: res.data
+        }
       })
   }
   fetchHistory (customerId: number): Promise<ApiResult> {

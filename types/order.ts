@@ -6,6 +6,7 @@ export interface OrderSet {
 export interface Order {
   userId: number
   shopId: number
+  code: string
   product: Product
   memo: string
   status: string

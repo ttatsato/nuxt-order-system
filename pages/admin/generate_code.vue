@@ -7,11 +7,10 @@
     </div>
   </div>
 </template>
-<script lang="ts">
+<script>
   import {Component, Provide, Vue, Watch} from 'nuxt-property-decorator'
   import {searchStore} from '~/store'
-  import ProductRepository from "../../api/product";
-  import {Product} from "../../types";
+  //@ts-ignore
   import QrcodeVue from 'qrcode.vue'
   @Component({
     components: {

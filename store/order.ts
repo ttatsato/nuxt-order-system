@@ -39,9 +39,10 @@ export default class OrderStore extends VuexModule implements OrderState {
     let order: Order = {
       userId: 1,
       shopId: 1,
+      code: "6A",
       product: product,
       memo: "",
-      status: "注文",
+      status: "",
     }
     this.setOrderSet(order)
   }
@@ -58,7 +59,6 @@ export default class OrderStore extends VuexModule implements OrderState {
     }
     const orderRepository = new OrderRepository()
     return orderRepository.make(this.orderSet).then(res => {
-      console.log(res)
       if (res.status === 201) {
         this.resetOrderSet()
         return true

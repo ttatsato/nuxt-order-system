@@ -19,7 +19,7 @@
           <td>{{order.product.name}}</td>
           <td>{{order.product.price}}</td>
           <td>{{order.memo}}</td>
-          <td>{{order.createAt}}</td>
+          <td>{{order.createdAt}}</td>
         </tr>
         </tbody>
       </table>
