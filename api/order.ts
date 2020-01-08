@@ -16,7 +16,6 @@ export default class OrderRepository {
     return RequestService.get<SearchResult>('http://localhost:1323/order')
     // return RequestService.post<SearchResult>('https://us-central1-smartwaiter-263011.cloudfunctions.net/makeOrder', data)
       .then(res => {
-        console.log(res)
         return <SearchResult>res.data;
       })
   }

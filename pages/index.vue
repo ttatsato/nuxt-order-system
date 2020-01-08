@@ -57,7 +57,6 @@
       const productRepository = new ProductRepository()
       const result = await productRepository.fetch(shopId)
       this.products = result.data
-      console.log(this.products)
     }
     get orderSetCount(): number{
       return Object.keys(this.orders).length

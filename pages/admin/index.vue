@@ -65,16 +65,14 @@
     async createMenu () {
       const productRepository = new ProductRepository()
       const product: Product = {
-        id: null,
+        id: NaN,
         shopId: 1,
         name: this.name,
         price: this.price
       }
-      // price: typeof this.price !== "number" ? parseInt(this.price) : this.price
 
       const result = await productRepository.create(product)
       alert(result.data.name + "を登録しました。")
-      //  $router.push('/complete')"
       this.resetFormValue()
     }
     resetFormValue () {
