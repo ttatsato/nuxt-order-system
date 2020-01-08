@@ -7,7 +7,7 @@
         <ProductCard
           v-for="(product, index) in products"
           :key="index"
-          class="column is-5"
+          class="column"
           :product="product"
         />
       </div>

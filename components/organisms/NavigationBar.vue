@@ -2,10 +2,12 @@
   <b-navbar
     fixed-top
     class="navigation-bar">
-    <template slot="brand">
+    <template
+      v-if="shop"
+      slot="brand">
       <b-navbar-item
         tag="router-link"
-        :to="{ path: '/' }">ガスト 上野店
+        :to="{ path: '/' }">{{shop.name}}
       </b-navbar-item>
     </template>
     <template slot="end">
@@ -26,9 +28,15 @@
     </template>
   </b-navbar>
 </template>
-<script>
-  export default {
-    name: 'NavigationBar'
+<script lang="ts">
+  import {Component, Vue} from 'nuxt-property-decorator'
+  import {shopStore} from "../../utils/store-accessor";
+
+  @Component({})
+  export default class NavigationBar extends Vue {
+    get shop () {
+      return shopStore.getShop
+    }
   }
 </script>
 <style lang="sass" scoped>

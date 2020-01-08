@@ -2,15 +2,10 @@
   <div class="preview">
     <h2>いらっしゃいませ</h2>
     <div class="preview__body">
-      <p>
-        ガスト上野店へようこそ!<br>
+      <p v-if="shop.name">
+        <b>{{shop.name}}</b>へようこそ!<br>
         素敵なお食事のお時間をお過ごしください。
       </p><br>
-      <p>
-        このサービスを使った弊店でのご注文は、すべて<br>
-        <strong>都度支払い</strong><br>
-        です。
-      </p>
     </div>
     <div class="preview__footer">
       <b-button
@@ -21,9 +16,28 @@
   </div>
 </template>
 <script lang="ts">
-  import {Vue} from 'nuxt-property-decorator'
+  import {Vue, Component, Watch} from 'nuxt-property-decorator'
   import {searchStore} from '~/store'
+  import {shopStore} from "../utils/store-accessor";
+  @Component({})
   export default class Welcome extends Vue {
+    created () {
+      // const shopId: number = this.$route.query.shopId
+      const shopId: number = 1
+      shopStore.fetchShopInfo(shopId).then(isOk => {
+        if (!isOk) {
+          console.error("ショップ情報の取得に失敗しました。")
+        }
+      })
+    }
+    get shop () {
+      return shopStore.getShop
+    }
+
+    @Watch('shop')
+    change() {
+      console.log(this.shop)
+    }
   }
 </script>
 <style lang="sass" scoped>
