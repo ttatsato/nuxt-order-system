@@ -9,9 +9,12 @@ export interface Order {
   code: string
   product: Product
   memo: string
-  status: string
+  orderStatusRefer: number
 }
-
+export interface OrderStatusMaster {
+  id: number
+  name: string
+}
 export interface ApiResult {
   data: object
   status: number

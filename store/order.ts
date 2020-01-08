@@ -1,5 +1,5 @@
 import { VuexModule, Module, Mutation, Action } from 'vuex-module-decorators'
-import {OrderSet, Order} from '~/types/order'
+import {OrderSet, Order, OrderStatusMaster} from '~/types/order'
 import {Product} from "~/types";
 import OrderRepository from "~/api/order";
 export interface OrderState {
@@ -42,7 +42,7 @@ export default class OrderStore extends VuexModule implements OrderState {
       code: "6A",
       product: product,
       memo: "",
-      status: "",
+      orderStatusRefer: 1
     }
     this.setOrderSet(order)
   }

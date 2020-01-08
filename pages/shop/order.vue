@@ -82,7 +82,7 @@
         centered: true
       },
       {
-        field: 'status',
+        field: 'orderStatus.name',
         label: '提供ステータス',
       }
       ]
